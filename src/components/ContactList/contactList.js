@@ -1,28 +1,18 @@
 import React from "react";
-import List from "./list";
 import style from "./ContactList.module.css";
-import { CSSTransition } from "react-transition-group";
-import slideStyle from "../../transition/slide.module.css";
+import ContactListItem from "./ContactListItem";
 
-const ContactList = ({ contacts, onDeleteList }) => {
+const ContactList = ({ contacts }) => {
   return (
-    contacts.length > 0 && (
-      <ul className={style.contactList}>
-        {contacts.map((item) => (
-          <li key={item.id}>
-            <CSSTransition
-              in
-              timeout={250}
-              classNames={slideStyle}
-              key={item.id}
-              unmountOnExit
-            >
-              <List {...item} onDeleteList={() => onDeleteList(item.id)} />
-            </CSSTransition>
-          </li>
-        ))}
-      </ul>
-    )
+    <>
+      {contacts.length > 0 && (
+        <ul className={style.contactList}>
+          {contacts.map((item) => (
+            <ContactListItem item={item} key={item.id} />
+          ))}
+        </ul>
+      )}
+    </>
   );
 };
 

@@ -4,6 +4,7 @@ import style from "./PhoneBook.module.css";
 import { connect } from "react-redux";
 import { addContact } from "../../Redux/actions/actions";
 import AlertContact from "../AlertComponent/AlertContact";
+import { onContact } from "../../Redux/reducers/Selectors/contactSelectors";
 
 class ContactForm extends Component {
   state = {
@@ -79,12 +80,12 @@ class ContactForm extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  contacts: state.contacts.contacts,
+const MSTP = (state) => ({
+  contacts: onContact(state),
 });
 
-const mapDispathToProps = (dispatch) => ({
+const MDTP = (dispatch) => ({
   addContact: (contact) => dispatch(addContact(contact)),
 });
 
-export default connect(mapStateToProps, mapDispathToProps)(ContactForm);
+export default connect(MSTP, MDTP)(ContactForm);

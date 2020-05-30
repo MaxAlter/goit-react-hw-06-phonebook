@@ -7,6 +7,7 @@ import Filter from "./components/filter/filter";
 import PhoneBook from "./components/PhoneBook/PhoneBook";
 import { connect } from "react-redux";
 import { filterContact } from "./Redux/actions/actions";
+import { onContact } from "./Redux/reducers/Selectors/contactSelectors";
 
 class App extends Component {
   handleFIlter = (e) => {
@@ -33,12 +34,12 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  contacts: state.contacts.contacts,
+const MSTP = (state) => ({
+  contacts: onContact(state),
 });
 
-const mapDispathToProps = (dispatch) => ({
+const MDTP = (dispatch) => ({
   filterContact: (text) => dispatch(filterContact(text)),
 });
 
-export default connect(mapStateToProps, mapDispathToProps)(App);
+export default connect(MSTP, MDTP)(App);
